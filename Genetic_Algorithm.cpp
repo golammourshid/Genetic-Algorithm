@@ -43,7 +43,7 @@ public:
 
 int main ()
 {
-    int totalRobot = 5, totalGeneration = 10;
+    int totalRobot = 200, totalGeneration = 10;
     allRobot all_robot[totalRobot], tempRobot, generationCountRobot[totalGeneration];
     cout<<"Starting Genetic Algorithm SImulation..............."<<endl<<endl;
     int indx, generation;
@@ -71,22 +71,22 @@ int main ()
             {
                 for (int j=0; j<5; j++)
                 {
-                    cout<<all_robot[indx].Gene[i][j] <<" ";
+                    //cout<<all_robot[indx].Gene[i][j] <<" ";
 
                 }
-                cout<<endl;
+                //cout<<endl;
             }
-            cout<<endl;
-            cout<<endl;
-            cout<<endl;
+            //cout<<endl;
+            //cout<<endl;
+            //cout<<endl;
             for(int i=0; i<12; i++)
             {
                 for (int j=0; j<12; j++)
                 {
-                    cout<<all_robot[indx].Grid[i][j] <<" ";
+                    //cout<<all_robot[indx].Grid[i][j] <<" ";
 
                 }
-                cout<<endl;
+                //cout<<endl;
             }
             cntTurn+=all_robot[indx].robotWithTurns;
             cout<<"Total Turns: "<<all_robot[indx].robotWithTurns<<endl;
@@ -99,17 +99,17 @@ int main ()
             {
                 for (int j=0; j<5; j++)
                 {
-                    cout<<all_robot[k].Gene[i][j] <<" ";
+                    //cout<<all_robot[k].Gene[i][j] <<" ";
 
                 }
-                cout<<endl;
+                //cout<<endl;
             }
-            cout<<endl;
+            //cout<<endl;
         }
-        generationCountRobot[generation].robotAvgFitness = cntTurn/totalRobot;
+        generationCountRobot[generation].robotAvgFitness = (double)cntTurn/(double)totalRobot;
         cout<<"Average fitness of generation "<<generation<<": "<<generationCountRobot[generation].robotAvgFitness<<endl;
     }
-    for(int i=0;i<totalGeneration;i++)
+    for(int i=0; i<totalGeneration; i++)
     {
         //generationCountRobot[generation].robotAvgFitness = cntTurn/totalRobot;
         cout<<"Average fitness of generation "<<i<<": "<<generationCountRobot[i].robotAvgFitness<<endl;
@@ -131,7 +131,8 @@ void allRobot::placeRobot()
 void allRobot::runRobot()
 {
     //cout<<"HI Antor "<<Grid[1][2]<<endl;
-    int x=initX, y=initY, turns = 0;
+    int x=initX, y=initY;
+    double turns = 0.0;
     cout<<"initial X: "<<x<<", Initial Y: "<<y<<endl;
     //cout<<"initial energy: "<<robotWithEnergy[robotSeq][0]<<endl;
     //added a flag for matching a gene
@@ -199,13 +200,13 @@ void allRobot::runRobot()
 
 void allRobot::sortRoboticGene(allRobot obj[])
 {
-    for(int i=0; i<5-1; i++)
+    for(int i=0; i<200-1; i++)
     {
-        for(int j=0; j<5-1-i; j++)
+        for(int j=0; j<200-1-i; j++)
         {
             if(obj[j].robotWithTurns < obj[j+1].robotWithTurns)
             {
-                cout<<obj[j].robotWithTurns<<" and "<<obj[j+1].robotWithTurns<<endl;
+                //cout<<obj[j].robotWithTurns<<" and "<<obj[j+1].robotWithTurns<<endl;
                 swap(obj[j].Gene,obj[j+1].Gene);
                 swap(obj[j].robotWithTurns,obj[j+1].robotWithTurns);
             }
@@ -215,13 +216,26 @@ void allRobot::sortRoboticGene(allRobot obj[])
 
 void allRobot::Reproduction(allRobot obj[])
 {
-    for(int i=0; i<4; i+=2)
+    for(int i=0, k = 101; i<100; i+=2, k+=2)
     {
-
-        for(int j=8; j<16; j++)
+        for(int j=0; j<8; j++)
         {
             //cout<<obj[j].robotWithTurns<<" and "<<obj[j+1].robotWithTurns<<endl;
-            swap(obj[i].Gene[j],obj[i+1].Gene[j]);
+            for(int m = 0; m<5; m++)
+            {
+                obj[k].Gene[j][m] = obj[i].Gene[j][m];
+                obj[k+1].Gene[j][m] = obj[i+1].Gene[j][m];
+            }
+            //swap(obj[j].robotWithTurns,obj[j+1].robotWithTurns);
+        }
+        for(int j=8; j<15; j++)
+        {
+            //cout<<obj[j].robotWithTurns<<" and "<<obj[j+1].robotWithTurns<<endl;
+            for(int m = 0; m<5; m++)
+            {
+                obj[k].Gene[j][m] = obj[i+1].Gene[j][m];
+                obj[k+1].Gene[j][m] = obj[i].Gene[j][m];
+            }
             //swap(obj[j].robotWithTurns,obj[j+1].robotWithTurns);
         }
     }
