@@ -1,26 +1,21 @@
 // Source File Header
-// homework.cpp
+// Genetic_Algorithm.cpp
 // Md. Fahim Alam, CISP 400
-// 16/10/21
+// 12/13/22
 
 #include<iostream>
 #include <ctime>
-//#include <unistd.h>
 #include <stdlib.h>
-//#include <chrono>
 
 using namespace std;
 
-
-
-
-//This is the structure class of the Genetic Algorithm.
+//This is the main structure class of the Genetic Algorithm.
 class allRobot
 {
 public:
     int totalRobot = 200, totalGeneration = 50;
-    int robotWithPosition [12][12];
-    int robotWithGenes [16][5];
+    //int robotWithPosition [12][12];
+    //int robotWithGenes [16][5];
     int robotWithEnergy;
     int robotWithTurns;
     double robotAvgFitness;
@@ -69,7 +64,7 @@ int main ()
             }
             //all_robot[indx].gridCreate();
             all_robot[indx].placeRobot();
-            all_robot[indx].robotWithPosition[all_robot[indx].initX][all_robot[indx].initY];
+            //all_robot[indx].robotWithPosition[all_robot[indx].initX][all_robot[indx].initY];
             //all_robot.Grid, all_robot.robotWithGenes, all_robot.robotWithEnergy,all_robot.robotWithPosition
             all_robot[indx].runRobot();
             for(int i=0; i<16; i++)
